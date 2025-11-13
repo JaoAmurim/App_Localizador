@@ -7,14 +7,14 @@
     <title>Riofer | Selecione Seu Destino</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* Variáveis de Cor baseadas na identidade Riofer (Azul Escuro e Laranja/Amarelo) */
+        /* Variáveis de Cor */
         :root {
-            --riofer-blue: #0A1C40; /* Azul Escuro (Fundo) */
-            --riofer-orange: #FF7F00; /* Laranja Riofer (Destaque) */
-            --background-light: #F2F2F2; /* Fundo mais suave */
+            --riofer-blue: #0A1C40; 
+            --riofer-orange: #FF7F00; 
+            --background-light: #F2F2F2; 
             --text-color-light: #F2F2F2;
             --text-color-dark: #343a40;
-            --card-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Sombra mais suave */
+            --card-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); 
         }
 
         body {
@@ -33,98 +33,102 @@
             width: 100%;
             max-width: 800px;
             text-align: center;
-            /* Aumenta padding lateral no mobile para dar respiro */
-            padding: 20px; 
+            /* Reduzido de 10px para 5px para preencher mais a largura */
+            padding: 5px; 
         }
 
         h1 {
             color: var(--text-color-light);
-            margin-bottom: 30px; /* Reduzi 10px para mobile */
-            padding-top: 15px; /* Reduzi 5px para economizar espaço no topo */
-            font-size: 1.8em; /* Levemente menor para caber melhor */
+            margin-bottom: 20px; 
+            padding-top: 15px; 
+            /* AUMENTADO para dar mais impacto visual no topo */
+            font-size: 1.8em; 
             font-weight: 800;
         }
 
-        /* Layout mobile (1 coluna) */
+        /* 3 COLUNAS SEMPRE */
         .card-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px; /* Reduzi o gap para aproveitar melhor o espaço vertical */
-            padding-bottom: 20px;
+            grid-template-columns: repeat(3, 1fr); 
+            /* Reduzido de 10px para 8px para preencher mais */
+            gap: 8px; 
+            padding: 10px 0; 
         }
 
-        @media (min-width: 768px) {
-            .card-grid {
-                grid-template-columns: repeat(3, 1fr);
+        /* Layout para telas maiores */
+        @media (min-width: 600px) {
+             .card-grid {
                 gap: 20px;
             }
             h1 {
-                font-size: 2em;
+                font-size: 2.2em;
             }
         }
 
-        /* Estilo dos Cards de Navegação - OTIMIZAÇÃO DE TOQUE */
+        /* Estilo dos Cards de Navegação */
         .nav-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 12px; 
             box-shadow: var(--card-shadow);
             text-decoration: none;
             display: flex;
             flex-direction: column;
             align-items: center;
-            /* Aumentei o padding vertical para dar mais área de toque */
-            padding: 20px 10px; 
+            /* Padding vertical aumentado para preencher mais */
+            padding: 20px 5px; 
             transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.1s;
             height: 100%;
         }
         
-        /* Efeito de Clique Mobile (Active) */
+        /* Efeito de Clique Mobile */
         .nav-card:active {
             transform: scale(0.98);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            background-color: var(--background-light); /* Feedback visual rápido */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+            background-color: var(--background-light);
         }
 
         .nav-card:hover {
-            transform: scale(1.03); /* Efeito menor no hover para mobile */
-            box-shadow: 0 10px 20px rgba(255, 127, 0, 0.3);
+            transform: scale(1.05); 
+            box-shadow: 0 8px 15px rgba(255, 127, 0, 0.3);
             cursor: pointer;
         }
 
-        /* Imagens (Ícones) */
+        /* Imagens (Ícones) - AUMENTADO para preencher mais */
         .card-image {
-            width: 70px; /* Levemente menor para caber no card com mais padding */
-            height: 70px;
+            width: 65px; 
+            height: 65px;
             object-fit: contain;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .card-title {
-            font-size: 1.1em;
-            font-weight: 600;
+            /* Levemente maior */
+            font-size: 0.9em; 
+            font-weight: 700;
             color: var(--riofer-blue);
             margin: 0;
             text-transform: uppercase;
         }
 
         .card-subtitle {
-            font-size: 0.85em; /* Levemente menor para se ajustar ao espaço */
+            font-size: 0.75em; /* Levemente maior */
             color: #6c757d;
-            margin-top: 4px;
+            margin-top: 2px;
             text-align: center;
+            word-wrap: break-word; 
         }
 
-        /* Dica de Notificação (Melhor contraste) */
+        /* Dica de Notificação */
         .note {
             margin-top: 25px;
             padding: 15px;
             background-color: #ffc107; 
-            color: var(--riofer-blue); /* Texto azul escuro para alto contraste */
+            color: var(--riofer-blue);
             border-radius: 8px;
             font-size: 0.95em;
             font-weight: 600;
             border: 1px solid #e0a800;
-            text-align: left; /* Alinhamento esquerdo para melhor leitura da DICA */
+            text-align: left;
         }
     </style>
 </head>
@@ -140,7 +144,7 @@
                 <img src="img/pngtree-mouse-hand-click-image_2281134.jpg" alt="Ícone de Balança" class="card-image">
                 <div class="card-content">
                     <p class="card-title">BALANÇA RIOFER</p>
-                    <p class="card-subtitle">Área de Pesagem e Saída de Cargas</p>
+                    <p class="card-subtitle">Pesagem / Saída</p> 
                 </div>
             </a>
 
@@ -148,7 +152,7 @@
                 <img src="img/pngtree-mouse-hand-click-image_2281134.jpg" alt="Ícone de Entrega" class="card-image">
                 <div class="card-content">
                     <p class="card-title">PAULA LIMA</p>
-                    <p class="card-subtitle">Unidade de Entrega e Recebimento</p>
+                    <p class="card-subtitle">Entrega / Recebimento</p>
                 </div>
             </a>
 
@@ -156,7 +160,7 @@
                 <img src="img/pngtree-mouse-hand-click-image_2281134.jpg" alt="Ícone de Sede Principal" class="card-image">
                 <div class="card-content">
                     <p class="card-title">RIOFER POTÊNCIA</p>
-                    <p class="card-subtitle">Escritórios e Sede Principal</p>
+                    <p class="card-subtitle">Escritórios / Sede</p>
                 </div>
             </a>
 
