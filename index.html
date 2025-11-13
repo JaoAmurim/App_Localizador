@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riofer | Selecione Seu Destino</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Variáveis de Cor baseadas na identidade Riofer (Azul Escuro e Laranja/Amarelo) */
+        :root {
+            --riofer-blue: #0A1C40; /* Azul Escuro (Fundo) */
+            --riofer-orange: #FF7F00; /* Laranja Riofer (Destaque) */
+            --background-light: #F2F2F2; /* Fundo mais suave */
+            --text-color-light: #F2F2F2;
+            --text-color-dark: #343a40;
+            --card-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Sombra mais suave */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--riofer-blue);
+            color: var(--text-color-dark);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            /* Aumenta padding lateral no mobile para dar respiro */
+            padding: 20px; 
+        }
+
+        h1 {
+            color: var(--text-color-light);
+            margin-bottom: 30px; /* Reduzi 10px para mobile */
+            padding-top: 15px; /* Reduzi 5px para economizar espaço no topo */
+            font-size: 1.8em; /* Levemente menor para caber melhor */
+            font-weight: 800;
+        }
+
+        /* Layout mobile (1 coluna) */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px; /* Reduzi o gap para aproveitar melhor o espaço vertical */
+            padding-bottom: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .card-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+        }
+
+        /* Estilo dos Cards de Navegação - OTIMIZAÇÃO DE TOQUE */
+        .nav-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Aumentei o padding vertical para dar mais área de toque */
+            padding: 20px 10px; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.1s;
+            height: 100%;
+        }
+        
+        /* Efeito de Clique Mobile (Active) */
+        .nav-card:active {
+            transform: scale(0.98);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background-color: var(--background-light); /* Feedback visual rápido */
+        }
+
+        .nav-card:hover {
+            transform: scale(1.03); /* Efeito menor no hover para mobile */
+            box-shadow: 0 10px 20px rgba(255, 127, 0, 0.3);
+            cursor: pointer;
+        }
+
+        /* Imagens (Ícones) */
+        .card-image {
+            width: 70px; /* Levemente menor para caber no card com mais padding */
+            height: 70px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .card-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--riofer-blue);
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .card-subtitle {
+            font-size: 0.85em; /* Levemente menor para se ajustar ao espaço */
+            color: #6c757d;
+            margin-top: 4px;
+            text-align: center;
+        }
+
+        /* Dica de Notificação (Melhor contraste) */
+        .note {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #ffc107; 
+            color: var(--riofer-blue); /* Texto azul escuro para alto contraste */
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-weight: 600;
+            border: 1px solid #e0a800;
+            text-align: left; /* Alinhamento esquerdo para melhor leitura da DICA */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>SELECIONE SEU DESTINO</h1>
+
+        <div class="card-grid">
+
+            <a href="balanca.html" class="nav-card">
+                <img src="img/pngtree-mouse-hand-click-image_2281134.jpg" alt="Ícone de Balança" class="card-image">
+                <div class="card-content">
+                    <p class="card-title">BALANÇA RIOFER</p>
+                    <p class="card-subtitle">Área de Pesagem e Saída de Cargas</p>
+                </div>
+            </a>
+
+            <a href="paula_lima.html" class="nav-card">
+                <img src="img/pngtree-mouse-hand-click-image_2281134.jpg" alt="Ícone de Entrega" class="card-image">
+                <div class="card-content">
+                    <p class="card-title">PAULA LIMA</p>
+                    <p class="card-subtitle">Unidade de Entrega e Recebimento</p>
+                </div>
+            </a>
+
+            <a href="potencia.html" class="nav-card">
+                <img src="img/pngtree-mouse-hand-click-image_2281134.jpg" alt="Ícone de Sede Principal" class="card-image">
+                <div class="card-content">
+                    <p class="card-title">RIOFER POTÊNCIA</p>
+                    <p class="card-subtitle">Escritórios e Sede Principal</p>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="note">
+            ✅ **DICA:** Para uma navegação mais precisa, certifique-se de ter o Google Maps ou Waze instalado e ativo no seu celular.
+        </div>
+    </div>
+
+</body>
+
+</html>

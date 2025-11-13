@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balança | Riofer Navegação</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --riofer-blue: #0A1C40;
+            --riofer-orange: #FF7F00;
+            --background-light: #F2F2F2;
+            --success-green: #28a745;
+            --map-blue: #007bff;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-light);
+            color: var(--riofer-blue);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .info-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: var(--riofer-orange);
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+        p.subtitle {
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 25px;
+        }
+        .reference {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 800;
+            text-transform: uppercase;
+            transition: background-color 0.2s;
+        }
+        .btn-maps {
+            background-color: var(--map-blue);
+            color: white;
+            box-shadow: 0 4px #0056b3;
+        }
+        .btn-waze {
+            background-color: var(--success-green);
+            color: white;
+            box-shadow: 0 4px #1e7e34;
+        }
+        .btn:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="info-box">
+        <h1>BALANÇA</h1>
+        <p class="subtitle">Selecione seu navegador:</p>
+        
+        <div class="reference">
+            PONTO DE REFERÊNCIA: Próximo ao TINTI Superatacado, em frente a Brapira.
+        </div>
+
+        <a href="https://maps.app.goo.gl/ebW7imFMCxf69d5w9" target="_blank" class="btn btn-maps">
+            Abrir no GOOGLE MAPS
+        </a>
+
+        <a href="https://www.waze.com/en/live-map/directions?latlng=-21.623224965385727%2C-46.89587961450333" target="_blank" class="btn btn-waze">
+            Abrir no WAZE
+        </a>
+
+        <p style="margin-top: 20px; font-size: 0.8em; color: #6c757d;">
+            Voltar para a <a href="index.html">Seleção de Destino</a>
+        </p>
+    </div>
+
+</body>
+</html>
