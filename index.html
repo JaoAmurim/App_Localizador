@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -10,205 +10,228 @@
     <title>Riofer | Navegação Fácil</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* Variáveis de Cor */
-        :root {
-            --riofer-blue: #0A1C40; 
-            --riofer-orange: #FF7F00; 
-            --background-light: #F2F2F2; 
-            --text-color-light: #F2F2F2;
-            --text-color-dark: #343a40;
-            --card-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); 
-        }
+      /* Variáveis de Cor */
+      :root {
+        --riofer-blue: #0A1C40;
+        --riofer-orange: #FF7F00;
+        --background-light: #F2F2F2;
+        --text-color-light: #F2F2F2;
+        --text-color-dark: #343a40;
+        --card-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--background-light); 
-            color: var(--text-color-dark);
-            margin: 0;
-            padding: 0;
-            /* Usar flexbox na body para centralizar todo o conteúdo principal */
-            display: flex;
-            flex-direction: column; /* Conteúdo em coluna */
-            align-items: center; /* Centraliza horizontalmente */
-            min-height: 100vh;
-            overflow-x: hidden; /* Evita scroll horizontal indesejado */
-        }
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: var(--background-light);
+        color: var(--text-color-dark);
+        margin: 0;
+        padding: 0;
+        /* Usar flexbox na body para centralizar todo o conteúdo principal */
+        display: flex;
+        flex-direction: column;
+        /* Conteúdo em coluna */
+        align-items: center;
+        /* Centraliza horizontalmente */
+        min-height: 100vh;
+        overflow-x: hidden;
+        /* Evita scroll horizontal indesejado */
+      }
 
-        /* CORREÇÃO DO HEADER */
-        .header {
-            background-color: var(--riofer-blue);
-            color: var(--text-color-light);
-            padding: 20px 15px; /* Ajustado padding */
-            font-weight: 800;
-            font-size: 1.2em;
-            text-align: center;
-            width: 100%; /* Ocupa 100% da largura */
-            box-sizing: border-box; /* Inclui padding na largura */
-            border-bottom-left-radius: 15px; 
-            border-bottom-right-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            position: sticky; 
-            top: 0;
-            z-index: 10;
-            /* Quebra de linha se necessário, mas tenta manter em uma linha */
-            white-space: normal; 
-            line-height: 1.3;
-        }
+      /* CORREÇÃO DO HEADER */
+      .header {
+        background-color: var(--riofer-blue);
+        color: var(--text-color-light);
+        padding: 20px 15px;
+        /* Ajustado padding */
+        font-weight: 800;
+        font-size: 1.2em;
+        text-align: center;
+        width: 100%;
+        /* Ocupa 100% da largura */
+        box-sizing: border-box;
+        /* Inclui padding na largura */
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        /* Quebra de linha se necessário, mas tenta manter em uma linha */
+        white-space: normal;
+        line-height: 1.3;
+      }
 
-        .main-content {
-            /* Novo container para cards e nota, flexível verticalmente */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 800px;
-            padding: 15px; /* Padding geral para o conteúdo */
-            box-sizing: border-box;
-            flex-grow: 1; /* Permite que ocupe o espaço restante */
-        }
+      .main-content {
+        /* Novo container para cards e nota, flexível verticalmente */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 800px;
+        padding: 15px;
+        /* Padding geral para o conteúdo */
+        box-sizing: border-box;
+        flex-grow: 1;
+        /* Permite que ocupe o espaço restante */
+      }
 
-        /* 3 COLUNAS SEMPRE - Reajustado para melhor encaixe */
+      /* 3 COLUNAS SEMPRE - Reajustado para melhor encaixe */
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        /* Espaçamento entre cards */
+        width: 100%;
+        /* Ocupa a largura total do main-content */
+        max-width: 400px;
+        /* Limite para não ficar muito largo em telas médias */
+        margin: 20px auto;
+        /* Centraliza a grade de cards */
+      }
+
+      /* Media query para telas maiores, para manter a estética */
+      @media (min-width: 600px) {
         .card-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 8px; /* Espaçamento entre cards */
-            width: 100%; /* Ocupa a largura total do main-content */
-            max-width: 400px; /* Limite para não ficar muito largo em telas médias */
-            margin: 20px auto; /* Centraliza a grade de cards */
+          gap: 20px;
+          max-width: 600px;
+          /* Maior largura em telas maiores */
         }
 
-        /* Media query para telas maiores, para manter a estética */
-        @media (min-width: 600px) {
-             .card-grid {
-                gap: 20px;
-                max-width: 600px; /* Maior largura em telas maiores */
-            }
-            .header {
-                font-size: 1.5em;
-            }
+        .header {
+          font-size: 1.5em;
         }
+      }
 
-        /* Estilo dos Cards de Navegação */
-        .nav-card {
-            background: white;
-            border-radius: 12px; 
-            box-shadow: var(--card-shadow);
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 15px 5px; /* Ajustado padding para caber o conteúdo */
-            transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s;
-            height: 100%;
-            border: 1px solid #ccc; 
-            box-sizing: border-box; /* Inclui padding e borda na altura/largura */
-        }
-        
-        .nav-card:active {
-            transform: scale(0.96); 
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
-            background-color: #f0f0f0; 
-        }
+      /* Estilo dos Cards de Navegação */
+      .nav-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: var(--card-shadow);
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px 5px;
+        /* Ajustado padding para caber o conteúdo */
+        transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s;
+        height: 100%;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        /* Inclui padding e borda na altura/largura */
+      }
 
-        .nav-card:hover {
-            transform: scale(1.05); 
-            box-shadow: 0 8px 15px rgba(255, 127, 0, 0.3);
-            cursor: pointer;
-        }
+      .nav-card:active {
+        transform: scale(0.96);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        background-color: #f0f0f0;
+      }
 
-        /* Imagens (Ícones) */
-        .card-image {
-            width: 60px; /* Levemente menor para garantir espaço */
-            height: 60px;
-            object-fit: contain;
-            margin-bottom: 5px;
-        }
+      .nav-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 15px rgba(255, 127, 0, 0.3);
+        cursor: pointer;
+      }
 
-        .card-title {
-            font-size: 0.85em; /* Ajustado para caber */
-            font-weight: 700;
-            color: var(--riofer-blue);
-            margin: 0;
-            text-transform: uppercase;
-            line-height: 1.2; /* Espaçamento de linha para título */
-        }
+      /* Imagens (Ícones) */
+      .card-image {
+        width: 60px;
+        /* Levemente menor para garantir espaço */
+        height: 60px;
+        object-fit: contain;
+        margin-bottom: 5px;
+      }
 
-        .card-subtitle {
-            font-size: 0.7em; /* Ajustado para caber */
-            color: #6c757d;
-            margin-top: 2px;
-            text-align: center;
-            word-wrap: break-word; 
-            line-height: 1.2;
-        }
+      .card-title {
+        font-size: 0.85em;
+        /* Ajustado para caber */
+        font-weight: 700;
+        color: var(--riofer-blue);
+        margin: 0;
+        text-transform: uppercase;
+        line-height: 1.2;
+        /* Espaçamento de linha para título */
+      }
 
-        /* CORREÇÃO DA NOTA */
-        .note {
-            /* Garantir que fique abaixo e centralizado */
-            margin: 20px auto; /* Margem superior e centralizado */
-            padding: 15px;
-            background-color: var(--riofer-orange); 
-            color: var(--riofer-blue);
-            border-radius: 8px;
-            font-size: 0.9em;
-            font-weight: 600;
-            border: 1px solid #e0a800;
-            text-align: left;
-            width: calc(100% - 30px); /* Ocupa quase 100% da largura do main-content com padding */
-            max-width: 400px; /* Limite para não ficar muito largo */
-            box-sizing: border-box;
-        }
+      .card-subtitle {
+        font-size: 0.7em;
+        /* Ajustado para caber */
+        color: #6c757d;
+        margin-top: 2px;
+        text-align: center;
+        word-wrap: break-word;
+        line-height: 1.2;
+      }
+
+      /* CORREÇÃO DA NOTA */
+      .note {
+        /* Garantir que fique abaixo e centralizado */
+        margin: 20px auto;
+        /* Margem superior e centralizado */
+        padding: 15px;
+        background-color: var(--riofer-orange);
+        color: var(--riofer-blue);
+        border-radius: 8px;
+        font-size: 0.9em;
+        font-weight: 600;
+        border: 1px solid #e0a800;
+        text-align: left;
+        width: calc(100% - 30px);
+        /* Ocupa quase 100% da largura do main-content com padding */
+        max-width: 400px;
+        /* Limite para não ficar muito largo */
+        box-sizing: border-box;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
 
     <div class="header">
-        RIOFER | NAVEGAÇÃO RÁPIDA
+      RIOFER | NAVEGAÇÃO RÁPIDA
     </div>
 
-     <div>
+    <br>
+
+    <div>
       <h2>
         Selecione seu Destino
       </h2>
     </div>
 
-
     <div class="main-content">
-        <div class="card-grid">
+      <div class="card-grid">
 
-            <a href="balanca.html" class="nav-card">
-                <img src="img/pngtree-mouse-hand-click-image_2281134.jpg" alt="Ícone de Balança" class="card-image">
-                <div class="card-content">
-                    <p class="card-title">BALANÇA RIOFER</p>
-                    <p class="card-subtitle">Pesagem / Saída de Cargas</p> 
-                </div>
-            </a>
+        <a href="balanca.html" class="nav-card">
+          <img src="img/pngtree-mouse-hand-click-image_2281134.jpg" alt="Ícone de Balança" class="card-image">
+          <div class="card-content">
+            <p class="card-title"> BALANÇA RIOFER </p>
+            <p class="card-subtitle"> Pesagem / Saída de Cargas </p>
+          </div>
+        </a>
 
-            <a href="paula_lima.html" class="nav-card">
-                <img src="img/pngtree-mouse-hand-click-image_2281134.jpg" alt="Ícone de Entrega" class="card-image">
-                <div class="card-content">
-                    <p class="card-title">PAULA LIMA</p>
-                    <p class="card-subtitle">Entrega / Recebimento de Materiais</p>
-                </div>
-            </a>
+        <a href="paula_lima.html" class="nav-card">
+          <img src="img/pngtree-mouse-hand-click-image_2281134.jpg" alt="Ícone de Entrega" class="card-image">
+          <div class="card-content">
+            <p class="card-title">RIOFER PAULA LIMA </p>
+            <p class="card-subtitle"> Entrega / Recebimento de Materiais </p>
+          </div>
+        </a>
 
-            <a href="potencia.html" class="nav-card">
-                <img src="img/pngtree-mouse-hand-click-image_2281134.jpg" alt="Ícone de Sede Principal" class="card-image">
-                <div class="card-content">
-                    <p class="card-title">RIOFER POTÊNCIA</p>
-                    <p class="card-subtitle">Escritórios / Sede Principal</p>
-                </div>
-            </a>
+        <a href="potencia.html" class="nav-card">
+          <img src="img/pngtree-mouse-hand-click-image_2281134.jpg" alt="Ícone de Sede Principal" class="card-image">
+          <div class="card-content">
+            <p class="card-title"> RIOFER POTÊNCIA </p>
+            <p class="card-subtitle"> Escritórios / Sede Principal </p>
+          </div>
+        </a>
 
-        </div>
+      </div>
 
-        <div class="note">
-            ✅ **IMPORTANTE:** Após a seleção, você escolherá o aplicativo (Maps ou Waze) para iniciar a rota.
-        </div>
+      <div class="note">
+        ✅ **IMPORTANTE:** Após a seleção, você escolherá o aplicativo (Maps ou Waze) para iniciar a rota.
+      </div>
     </div>
 
-</body>
+  </body>
 
 </html>
-
