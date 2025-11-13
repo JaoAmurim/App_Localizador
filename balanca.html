@@ -3,22 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Balança | Riofer Navegação</title>
+    <title>Balança | Navegação</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
+        /* Global box-sizing para evitar overflow */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         :root {
             --riofer-blue: #0A1C40;
             --riofer-orange: #FF7F00;
             --background-light: #F2F2F2;
-            --success-green: #28a745;
             --map-blue: #007bff;
+            --success-green: #28a745;
         }
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--background-light);
             color: var(--riofer-blue);
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -54,30 +59,47 @@
             font-weight: 600;
         }
         .btn {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 100%;
-            padding: 15px;
+            padding: 18px;
             margin-bottom: 15px;
             border-radius: 10px;
             text-decoration: none;
             font-size: 1.1em;
             font-weight: 800;
             text-transform: uppercase;
-            transition: background-color 0.2s;
+            transition: all 0.05s ease;
+            border: none;
+            position: relative;
         }
         .btn-maps {
             background-color: var(--map-blue);
             color: white;
-            box-shadow: 0 4px #0056b3;
+            box-shadow: 0 6px 12px rgba(0, 123, 255, 0.18);
         }
         .btn-waze {
             background-color: var(--success-green);
             color: white;
-            box-shadow: 0 4px #1e7e34;
+            box-shadow: 0 6px 12px rgba(40, 167, 69, 0.18);
         }
         .btn:active {
             transform: translateY(2px);
             box-shadow: none;
+        }
+        .back-link {
+            margin-top: 15px;
+            font-size: 0.8em;
+            color: #6c757d;
+        }
+        .back-link a {
+            color: var(--riofer-blue);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -91,16 +113,16 @@
             PONTO DE REFERÊNCIA: Próximo ao TINTI Superatacado, em frente a Brapira.
         </div>
 
-        <a href="https://maps.app.goo.gl/ebW7imFMCxf69d5w9" target="_blank" class="btn btn-maps">
+        <a href="https://maps.app.goo.gl/ebW7imFMCxf69d5w9" target="_blank" rel="noopener noreferrer" class="btn btn-maps" role="button" aria-label="Abrir no Google Maps">
             Abrir no GOOGLE MAPS
         </a>
 
-        <a href="https://www.waze.com/en/live-map/directions?latlng=-21.623224965385727%2C-46.89587961450333" target="_blank" class="btn btn-waze">
+        <a href="https://www.waze.com/en/live-map/directions?latlng=-21.623224965385727%2C-46.89587961450333" target="_blank" rel="noopener noreferrer" class="btn btn-waze" role="button" aria-label="Abrir no Waze">
             Abrir no WAZE
         </a>
 
-        <p style="margin-top: 20px; font-size: 0.8em; color: #6c757d;">
-            Voltar para a <a href="index.html">Seleção de Destino</a>
+        <p class="back-link">
+            <a href="index.html">Voltar para a Seleção de Destino</a>
         </p>
     </div>
 

@@ -1,196 +1,130 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Paula Lima | Navegação</title>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+	<style>
+		/* Global box-sizing para evitar overflow */
+		*, *::before, *::after {
+			box-sizing: border-box;
+		}
 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="mobile-web-app-capable" content="yes">
-		<meta name="theme-color" content="#0A1C40">
-		<title>Paula Lima | Navegação</title>
+		:root {
+			--riofer-blue: #0A1C40;
+			--riofer-orange: #FF7F00;
+			--background-light: #F2F2F2;
+			--map-blue: #007bff;
+			--success-green: #28a745;
+		}
+		body {
+			font-family: 'Poppins', sans-serif;
+			background-color: var(--background-light);
+			color: var(--riofer-blue);
+			margin: 0;
+			padding: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			min-height: 100vh;
+		}
+		.info-box {
+			background-color: white;
+			padding: 30px;
+			border-radius: 15px;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+			max-width: 400px;
+			width: 100%;
+			text-align: center;
+		}
+		h1 {
+			color: var(--riofer-orange);
+			font-size: 1.8em;
+			margin-bottom: 5px;
+		}
+		p.subtitle {
+			font-weight: 600;
+			font-size: 1.1em;
+			margin-bottom: 25px;
+		}
+		.reference {
+			background-color: #fff3cd;
+			color: #856404;
+			padding: 10px;
+			border-radius: 8px;
+			font-size: 0.9em;
+			margin-bottom: 25px;
+			font-weight: 600;
+		}
+		.btn {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			padding: 18px;
+			margin-bottom: 15px;
+			border-radius: 10px;
+			text-decoration: none;
+			font-size: 1.1em;
+			font-weight: 800;
+			text-transform: uppercase;
+			transition: all 0.05s ease;
+			border: none;
+			position: relative;
+		}
+		.btn-maps {
+			background-color: var(--map-blue);
+			color: white;
+			box-shadow: 0 6px 12px rgba(0, 123, 255, 0.18);
+		}
+		.btn-waze {
+			background-color: var(--success-green);
+			color: white;
+			box-shadow: 0 6px 12px rgba(40, 167, 69, 0.18);
+		}
+		.btn:active {
+			transform: translateY(2px);
+			box-shadow: none;
+		}
+		.back-link {
+			margin-top: 15px;
+			font-size: 0.8em;
+			color: #6c757d;
+		}
+		.back-link a {
+			color: var(--riofer-blue);
+			font-weight: 600;
+			text-decoration: none;
+		}
+		.back-link a:hover {
+			text-decoration: underline;
+		}
+	</style>
+</head>
+<body>
 
-		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-
-		<style>
-			/* Variáveis de Cor (Riofer Palette) */
-			:root {
-				--riofer-blue: #0A1C40;
-				--riofer-orange: #FF7F00;
-				--background-light: #F2F2F2;
-				--map-color: #4285F4;
-				--waze-color: #2DC653;
-				--shadow-depth: 4px;
-			}
-
-					/* Use box-sizing globalmente para evitar overflow causado por padding/border */
-					*, *::before, *::after {
-						box-sizing: border-box;
-					}
-
-					body {
-				font-family: 'Poppins', sans-serif;
-				background-color: var(--background-light);
-				color: var(--riofer-blue);
-				margin: 0;
-				padding: 0;
-				display: flex;
-				flex-direction: column;
-				min-height: 100vh;
-			}
-
-			/* Header fixo */
-			.header {
-				background-color: var(--riofer-blue);
-				color: white;
-				padding: 20px 15px;
-				font-weight: 800;
-				font-size: 1.2em;
-				text-align: center;
-				width: 100%;
-				box-sizing: border-box;
-				border-bottom-left-radius: 15px;
-				border-bottom-right-radius: 15px;
-				box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-			}
-
-			.main-content-wrapper {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				width: 100%;
-				flex-grow: 1;
-				padding: 20px 0;
-			}
-
-					.info-box {
-						background-color: white;
-						padding: 25px;
-						border-radius: 15px;
-						box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-						max-width: 400px;
-						width: 100%; /* usar 100% com box-sizing evita overflow */
-						text-align: center;
-					}
-
-			h1 {
-				color: var(--riofer-orange);
-				font-size: 1.8em;
-				font-weight: 800;
-				margin-bottom: 5px;
-			}
-
-			p.subtitle {
-				font-weight: 600;
-				font-size: 1.1em;
-				margin-bottom: 25px;
-				color: var(--riofer-blue);
-			}
-
-			.reference {
-				background-color: #fff3cd;
-				color: #856404;
-				padding: 10px;
-				border-radius: 8px;
-				font-size: 0.9em;
-				margin-bottom: 25px;
-				font-weight: 600;
-				border: 1px solid #ffc107;
-				text-align: center;
-			}
-
-			.btn {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				width: 100%;
-				padding: 18px;
-				margin-bottom: 20px;
-				border-radius: 12px;
-				text-decoration: none;
-				font-size: 1.1em;
-				font-weight: 800;
-				text-transform: uppercase;
-				transition: all 0.05s ease;
-				border: none;
-				position: relative;
-			}
-
-			.btn span {
-				display: inline-block;
-				text-align: center;
-				flex-grow: 1;
-			}
-
-					.btn img {
-						flex-shrink: 0;
-						margin-right: 10px;
-						width: 24px; /* garantir tamanho fixo e evitar que imagem estoure o container */
-						height: auto;
-						display: block;
-					}
-
-			.btn-maps {
-				background-color: var(--map-color);
-				color: white;
-				box-shadow: 0 6px 12px rgba(66, 133, 244, 0.18);
-			}
-
-			.btn-waze {
-				background-color: var(--waze-color);
-				color: white;
-				box-shadow: 0 6px 12px rgba(45, 198, 83, 0.18);
-			}
-
-			.btn:active {
-				transform: translateY(2px);
-				box-shadow: none;
-			}
-
-			.back-link {
-				margin-top: 15px;
-				font-size: 0.9em;
-				color: #6c757d;
-				text-align: center;
-			}
-
-			.back-link a {
-				color: var(--riofer-blue);
-				font-weight: 600;
-				text-decoration: none;
-			}
-
-			.back-link a:hover {
-				text-decoration: underline;
-			}
-		</style>
-
-	</head>
-
-	<body>
-
-		<div class="header">RIOFER PAULA LIMA</div>
-
-		<div class="main-content-wrapper">
-			<div class="info-box">
-				<h1>PAULA LIMA</h1>
-				<p class="subtitle">Entrega / Recebimento de Materiais</p>
-
-				<p class="subtitle">Selecione seu navegador:</p>
-
-				<div class="reference">📍 PONTO DE REFERÊNCIA: Em frente à Igreja do Bairro Paula Lima.</div>
-
-				<a href="https://maps.app.goo.gl/p6SYegzZ6xo34o8n8" target="_blank" rel="noopener noreferrer" class="btn btn-maps" role="button" aria-label="Abrir no Google Maps">
-					<span>Abrir no GOOGLE MAPS</span>
-				</a>
-
-				<a href="https://www.waze.com/en/live-map/directions/br/sp/riofer-metais-tecnologia-em-aco?place=ChIJLxXLagDTt5QRK-XWlnJIbD8" target="_blank" rel="noopener noreferrer" class="btn btn-waze" role="button" aria-label="Abrir no Waze">
-					<span>Abrir no WAZE</span>
-				</a>
-
-				<p class="back-link"><a href="index.html">← Voltar para a Seleção de Destino</a></p>
-			</div>
+	<div class="info-box">
+		<h1>PAULA LIMA</h1>
+		<p class="subtitle">Selecione seu navegador:</p>
+		
+		<div class="reference">
+			PONTO DE REFERÊNCIA: Em frente à Igreja do Bairro Paula Lima.
 		</div>
 
-	</body>
+		<a href="https://maps.app.goo.gl/p6SYegzZ6xo34o8n8" target="_blank" rel="noopener noreferrer" class="btn btn-maps" role="button" aria-label="Abrir no Google Maps">
+			Abrir no GOOGLE MAPS
+		</a>
 
+		<a href="https://www.waze.com/en/live-map/directions/br/sp/riofer-metais-tecnologia-em-aco?place=ChIJLxXLagDTt5QRK-XWlnJIbD8" target="_blank" rel="noopener noreferrer" class="btn btn-waze" role="button" aria-label="Abrir no Waze">
+			Abrir no WAZE
+		</a>
+
+		<p class="back-link">
+			<a href="index.html">Voltar para a Seleção de Destino</a>
+		</p>
+	</div>
+
+</body>
 </html>
