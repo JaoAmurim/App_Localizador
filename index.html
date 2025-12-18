@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0A1C40">
+    <title>Riofer | Navegação Fácil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Variáveis de Cor (Riofer Palette) */
+        :root {
+            --riofer-blue: #0A1C40; /* brand blue (from logo) */
+            --riofer-blue-2: #07203a; /* darker shade for accents */
+            --riofer-orange: #FF7F00; /* brand orange (from logo) */
+            --background-light: #F4F6F8; /* slightly deeper neutral for contrast */
+            --text-color-light: #ffffff;
+            --text-color-dark: #24323a;
+            --card-shadow: 0 10px 36px rgba(10, 28, 64, 0.10);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-light);
+            color: var(--text-color-dark);
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            line-height: 1.48;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        /* HEADER - Visual de Barra de Navegação Fixa (App) */
+        /* Simplified header: only centered logo to avoid odd empty space */
+        .header {
+            background: transparent;
+            color: var(--text-color-light);
+            padding: 8px 12px;
+            display:flex; align-items:center; justify-content:center;
+            font-weight: 900;
+            font-size: 1.05em;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            margin-bottom: 6px; 
+        }
+        .header-inner { display:flex; align-items:center; gap:12px; justify-content:center; max-width:1100px; margin:0 auto; }
+        .site-logo { height:44px; width:auto; display:block }
+        .brand-text { display:none }
+        @media (max-width:520px){ .site-logo{height:38px} }
+        
+        /* NOVO ESTILO: Título 'Selecione seu Destino' */
+        .page-title {
+            color: var(--riofer-blue);
+            font-weight: 800;
+            font-size: 1.6em;
+            margin: 16px 0 8px 0;
+            text-align: center;
+            width: 100%;
+            letter-spacing: 0.2px;
+        }
+
+        .page-desc {
+            max-width: 760px;
+            color: #475157;
+            text-align: center;
+            font-size: 1.04em;
+            margin: 0 0 16px 0;
+            line-height: 1.5;
+            padding: 0 12px;
+        }
+
+        /* HERO */
+        #heroMap {
+            width: 100%;
+            height: 280px; /* maior em desktop */
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            transition: transform .18s ease;
+        }
+        @media (max-width: 760px) {
+            #heroMap { height: 180px; }
+        }
+        #heroMap:hover { transform: translateY(-4px); }
+
+        .hero-legend {
+            max-width: 920px;
+            width: 100%;
+            margin: 10px auto 18px auto;
+            display:flex;
+            gap:8px;
+            align-items:center;
+            justify-content:center;
+            color:#495057;
+            font-weight:600;
+            font-size:0.95em;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1100px;
+            padding: 0 15px 15px 15px; /* Ajuste: Removido padding superior para deixar o título se encaixar */
+            box-sizing: border-box;
+            flex-grow: 1;
+        }
+
+        /* 3 COLUNAS SEMPRE */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 14px;
+            width: 100%;
+            max-width: 980px;
+            margin: 0 auto;
+            padding-bottom: 20px;
+        }
+
+        /* Media query para telas maiores */
+        @media (min-width: 600px) {
+             .card-grid {
+                gap: 18px;
+                max-width: 900px;
+            }
+            .header {
+                font-size: 1.5em;
+            }
+            .page-title {
+                font-size: 1.8em;
+            }
+        }
+
+        /* Estilo dos Cards de Navegação */
+        .nav-card {
+            background: linear-gradient(180deg, #ffffff, #fbfcfd);
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            padding: 0;
+            transition: transform 0.12s ease, box-shadow .12s ease, border-color .12s ease;
+            height: 100%;
+            border: 1px solid rgba(10,28,64,0.06);
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .nav-card:active {
+            transform: scale(0.96);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            background-color: #f0f0f0;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 40px rgba(10, 28, 64, 0.14);
+            border-color: rgba(255,127,0,0.18);
+        }
+
+        /* Ícones */
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display:block;
+            border-radius: 8px 0 0 8px;
+            background-color: #eef2f6;
+        }
+
+        /* Card layout: thumbnail left, content right on wide screens */
+        .card-row {
+            display:flex;
+            flex-direction:column;
+            gap:8px;
+        }
+        @media(min-width:760px){
+            .card-row{ flex-direction:row; align-items:stretch }
+            .card-left{ width:46%; min-width:200px }
+            .card-right{ width:54%; padding:18px }
+            .card-image { height:100%; border-radius:0 }
+        }
+
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 8px 6px 0 6px;
+        }
+
+        .card-title {
+            font-size: 1.02em;
+            font-weight: 800;
+            color: var(--riofer-blue);
+            margin: 0;
+            text-transform: none;
+            line-height: 1.18;
+        }
+
+        .pill {
+            background: var(--riofer-orange);
+            color: var(--text-color-light);
+            font-weight: 800;
+            font-size: 0.78em;
+            padding: 8px 12px;
+            border-radius: 999px;
+            white-space: nowrap;
+            box-shadow: 0 6px 18px rgba(255,127,0,0.12);
+        }
+
+        .card-subtitle {
+            font-size: 0.95em;
+            color: #48545a;
+            margin: 8px 6px 12px 6px;
+            text-align: left;
+            word-wrap: break-word;
+            line-height: 1.36;
+        }
+
+        .card-illustration {
+            padding: 6px;
+        }
+
+        /* Placeholder box used when thumbnails are removed */
+        .card-placeholder{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-weight:800;
+            color:#072030;
+            background:#eef6ff;
+            border-radius:12px 12px 12px 12px;
+            min-height:120px;
+            padding:12px;
+            text-transform:uppercase;
+            letter-spacing:0.6px;
+        }
+
+        /* Compact cards that match the screenshot (desktop) */
+        /* Use flex on wider screens so single-item last rows are centered; mobile rules below switch to grid */
+        .compact-cards { display:flex; flex-wrap:wrap; justify-content:center; gap:18px; }
+        .small-card { width:160px; height:140px; padding:14px; align-items:center; text-align:center; gap:8px; display:flex; flex-direction:column; justify-content:center; }
+        .card-icon { width:56px; height:56px; display:flex; align-items:center; justify-content:center; border-radius:50%; background: linear-gradient(180deg,#f4f7fb,#ffffff); box-shadow: 0 6px 18px rgba(7,32,48,0.04); margin:0 0 6px 0 }
+        .card-title.small { font-size:0.98em; text-transform:none; color:var(--riofer-blue); margin:6px 0 0 0; font-weight:800 }
+        .card-subtitle.small { font-size:0.86em; color:#6c757d; margin:4px 0 0 0 }
+
+        /* Mobile-first adjustments: stack cards, increase tap targets and readability */
+        @media (max-width: 520px) {
+            /* Use a responsive grid so cards sit side-by-side and keep equal heights */
+            .card-grid.compact-cards {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(140px, 1fr));
+                gap: 14px;
+                align-items: stretch;
+                padding: 0 14px;
+                width: 100%;
+                box-sizing: border-box;
+                max-width: 760px;
+                margin: 0 auto;
+            }
+            .small-card {
+                width: 100%;
+                height: 150px;
+                padding: 14px 12px;
+                border-radius: 14px;
+                box-shadow: 0 14px 40px rgba(7,32,48,0.07);
+                display:flex; flex-direction:column; justify-content:center; align-items:center; gap:6px;
+                transition: transform .12s ease, box-shadow .12s ease;
+            }
+            .small-card:hover{ transform: translateY(-6px); box-shadow: 0 20px 48px rgba(7,32,48,0.10) }
+            .card-icon { width:56px; height:56px; margin-bottom:6px }
+            .card-title.small { font-size: 1.04em; line-height:1.12; text-transform:none; text-align:center }
+            .card-subtitle.small { font-size:0.92em; color:#5f6b73; text-align:center; margin:4px 0 0 }
+            .page-desc { padding: 0 16px; font-size:0.98em }
+            .header { font-size: 1.02em; padding: 10px 12px; min-height:56px }
+            .brand-text{ font-size:0.95em }
+            .page-title{ font-size:1.4em; margin:10px 0 8px }
+            .main-content{ padding-top:6px }
+            .note { width: calc(100% - 28px); font-size: 0.95em; margin-top: 12px }
+            body { padding-bottom: 28px }
+        }
+
+        /* Note box (single, consistent style) */
+        .note {
+            margin: 12px auto 24px auto;
+            padding: 12px 14px;
+            background-color: var(--riofer-orange);
+            color: var(--text-color-light);
+            border-radius: 10px;
+            font-size: 0.96em;
+            font-weight: 700;
+            text-align: left;
+            width: calc(100% - 30px);
+            max-width: 760px;
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 12px;
+            align-items: center;
+            column-gap: 16px;
+            box-shadow: 0 10px 26px rgba(255,127,0,0.09);
+        }
+        .note .check { background: rgba(255,255,255,0.12); border-radius:8px; padding:8px; color:var(--text-color-light); font-weight:800; display:inline-flex; align-items:center; justify-content:center }
+        .note .note-body { display:flex; flex-direction:column }
+        .note .note-title { font-weight:900; margin-bottom:6px; color: #fff }
+        .note .note-text { font-weight:700; color: #fff; opacity:0.98; font-size:0.95em; line-height:1.32 }
+        /* Modal para mostrar mapa ampliado */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1200;
+            padding: 24px;
+        }
+        .modal-backdrop.open { display:flex; }
+        .modal-card {
+            background: white;
+            border-radius: 10px;
+            max-width: 1100px;
+            width: 100%;
+            max-height: 90vh;
+            overflow: auto;
+            box-shadow: 0 18px 50px rgba(10,28,64,0.25);
+        }
+        /* Small image modal (logo/lightbox) */
+        .image-modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 2200; padding: 18px; }
+        .image-modal.open { display:flex; }
+        .image-modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.75); }
+        .image-modal-content { position: relative; max-width: 920px; width: 100%; max-height: 100%; display:flex; align-items:center; justify-content:center; }
+        .image-modal-content img { max-width: 100%; max-height: calc(100vh - 120px); border-radius: 8px; box-shadow: 0 24px 60px rgba(10,28,64,0.4); display:block }
+        .image-modal .modal-close { position: absolute; right: 10px; top: 10px; background: rgba(255,255,255,0.12); color: white; border: none; width:44px; height:44px; border-radius: 10px; font-size: 20px; display:flex; align-items:center; justify-content:center }
+        .image-modal .modal-close:active { transform: translateY(1px) }
+        .modal-header { display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #eee }
+        .modal-body { padding: 0 16px 18px 16px }
+        .modal-body img { width:100%; height:auto; display:block; border-radius:6px }
+        .map-btn { background: var(--riofer-orange); color: white; border: none; padding: 10px 12px; border-radius:10px; font-weight:800; cursor:pointer }
+        .map-btn:active { transform: translateY(1px) }
+        .modal-close { background: transparent; border: none; font-size:1.05em; color:#6c757d; cursor:pointer }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="header-inner">
+            <a href="img/logo.png" class="logo-link" title="Abrir logo" aria-label="Abrir logo em overlay">
+                <img src="img/logo.png" alt="Riofer" class="site-logo" onerror="this.style.display='none'">
+            </a>
+            <div class="brand-text">RIOFER | NAVEGAÇÃO RÁPIDA</div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <h2 class="page-title">
+            Selecione seu Destino
+        </h2>
+
+        <p class="page-desc">Escolha onde você quer ir: disponibilizamos a opção de abrir a rota no Google Maps ou Waze. Toque no local desejado para ver mais detalhes, referências e iniciar a navegação — as descrições ajudam a identificar o ponto corretamente.</p>
+
+        <!-- topo limpo: sem hero para estilo compacto similar ao mockup -->
+
+        <div class="card-grid compact-cards">
+
+            <a href="paula_lima.html" class="nav-card small-card" title="MATRIZ RIOFER METAIS TECNOLOGIA EM AÇO">
+                <div class="card-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="36" height="36" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                        <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z" fill="#0A1C40"/>
+                        <circle cx="12" cy="9" r="2.5" fill="#FF7F00"/>
+                    </svg>
+                </div>
+                <p class="card-title small">MATRIZ RIOFER</p>
+                <p class="card-subtitle small">Entrega / Recebimento</p>
+            </a>
+
+            <a href="potencia.html" class="nav-card small-card">
+                <div class="card-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="36" height="36" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                        <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z" fill="#0A1C40"/>
+                        <circle cx="12" cy="9" r="2.5" fill="#FF7F00"/>
+                    </svg>
+                </div>
+                <p class="card-title small">RIOFER DEPÓSITO</p>
+                <p class="card-subtitle small">RH / Deposito</p>
+            </a>
+
+            <a href="balanca.html" class="nav-card small-card">
+                <div class="card-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="36" height="36" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                        <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z" fill="#0A1C40"/>
+                        <circle cx="12" cy="9" r="2.5" fill="#FF7F00"/>
+                    </svg>
+                </div>
+                <p class="card-title small">BALANÇA RIOFER</p>
+                <p class="card-subtitle small">Pesagem</p>
+            </a>
+
+        </div>
+
+        <div class="note">
+            <span class="check" aria-hidden="true">✅</span>
+            <div class="note-body">
+                <div class="note-title">IMPORTANTE:</div>
+                <div class="note-text">Após a seleção, você escolherá o aplicativo (Google Maps ou Waze) para iniciar a rota.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: mapa ampliado / recortes -->
+    <!-- Logo/image lightbox -->
+    <div id="logoModal" class="image-modal" role="dialog" aria-hidden="true">
+        <div class="image-modal-backdrop" data-modal-close></div>
+        <div class="image-modal-content" role="document">
+            <button class="modal-close" aria-label="Fechar imagem" data-modal-close>✕</button>
+            <img id="logoModalImage" src="" alt="Logo Riofer">
+        </div>
+    </div>
+
+    <div id="mapModal" class="modal-backdrop" role="dialog" aria-hidden="true">
+        <div class="modal-card" role="document">
+            <div class="modal-header">
+                <strong id="modalTitle">Mapa</strong>
+                <div>
+                    <button class="modal-close" id="modalClose" aria-label="Fechar">✕</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <img id="modalImage" src="img/map-overview.svg" alt="Mapa ampliado">
+                <p style="color:#6c757d;font-size:0.95em;margin-top:8px">Use o botão abaixo para abrir no Google Maps.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function(){
+            const modal = document.getElementById('mapModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const closeBtn = document.getElementById('modalClose');
+
+            function openModal(mapFile, title) {
+                modalImage.src = 'img/' + mapFile;
+                modalTitle.textContent = title || 'Mapa';
+                modal.classList.add('open');
+                modal.setAttribute('aria-hidden','false');
+            }
+
+            function closeModal(){
+                modal.classList.remove('open');
+                modal.setAttribute('aria-hidden','true');
+            }
+
+            document.querySelectorAll('.map-btn').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const mapFile = this.getAttribute('data-map');
+                    const title = this.closest('.nav-card').querySelector('.card-title').textContent.trim();
+                    openModal(mapFile, title);
+                });
+            });
+
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', function(e){ if(e.target === modal) closeModal(); });
+            document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+        })();
+    </script>
+
+    <script>
+        (function(){
+            const logoLink = document.querySelector('.logo-link');
+            const logoModal = document.getElementById('logoModal');
+            const logoImg = document.getElementById('logoModalImage');
+            const logoClose = logoModal ? logoModal.querySelector('[data-modal-close]') : null;
+
+            function openLogo(src, alt){
+                if(!logoModal) return;
+                logoImg.src = src;
+                logoImg.alt = alt || '';
+                logoModal.classList.add('open');
+                logoModal.setAttribute('aria-hidden','false');
+                setTimeout(()=> logoModal.querySelector('.modal-close').focus(), 50);
+            }
+            function closeLogo(){
+                if(!logoModal) return;
+                logoModal.classList.remove('open');
+                logoModal.setAttribute('aria-hidden','true');
+                logoImg.src = '';
+            }
+
+            if(logoLink){
+                logoLink.addEventListener('click', function(e){
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    const img = this.querySelector('img');
+                    openLogo(href, img ? img.alt : '');
+                });
+            }
+            if(logoClose) logoClose.addEventListener('click', closeLogo);
+            if(logoModal) logoModal.querySelector('.image-modal-backdrop').addEventListener('click', closeLogo);
+            document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeLogo(); });
+        })();
+    </script>
+
+</body>
+
+</html>

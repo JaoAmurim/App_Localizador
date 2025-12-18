@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balança Riofer | Navegação</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Global box-sizing para evitar overflow */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --riofer-blue: #0A1C40;
+            --riofer-blue-2: #07203a;
+            --riofer-orange: #FF7F00;
+            --background-light: #F7F7F8;
+            --map-blue: #007bff;
+            --success-green: #28a745;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-light);
+            color: var(--riofer-blue);
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            line-height: 1.48;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .info-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 14px 36px rgba(10,28,64,0.10);
+            max-width: 520px;
+            width: 100%;
+            text-align: center;
+            border-left: 6px solid var(--riofer-orange);
+        }
+        h1 {
+            color: var(--riofer-orange);
+            font-size: 2.0em;
+            margin-bottom: 6px;
+        }
+        p.subtitle {
+            font-weight: 600;
+            font-size: 1.12em;
+            margin-bottom: 22px;
+        }
+        .reference {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 18px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 800;
+            text-transform: uppercase;
+            transition: all 0.05s ease;
+            border: none;
+            position: relative;
+        }
+        .btn-maps {
+            background: linear-gradient(90deg, var(--riofer-blue), var(--riofer-blue-2));
+            color: white;
+            box-shadow: 0 12px 26px rgba(10,28,64,0.12);
+        }
+        .btn-waze {
+            background: linear-gradient(90deg, #2fc25b, #28a745);
+            color: white;
+            box-shadow: 0 10px 22px rgba(40,167,69,0.09);
+        }
+        .btn:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+        .back-link {
+            margin-top: 15px;
+            font-size: 0.8em;
+            color: #6c757d;
+        }
+        .back-link a {
+            color: var(--riofer-blue);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hero image responsiva — limita tamanho sem distorcer ou perder proporção */
+        .hero-image {
+            display: block;
+            width: 100%;
+            max-width: 760px; /* limita largura máxima */
+            height: 200px; /* altura fixa para consistência */
+            object-fit: cover; /* preserva proporção e mantém corte */
+            border-radius: 12px;
+            box-shadow: 0 16px 44px rgba(10,28,64,0.12);
+            background: linear-gradient(180deg,#eef2f6,#ffffff);
+            margin: 12px auto;
+            image-rendering: -webkit-optimize-contrast; /* tenta preservar nitidez em alguns navegadores */
+            cursor: pointer;
+        }
+        a.hero-link:focus { outline: 3px solid rgba(255,127,0,0.9); outline-offset:6px; border-radius:8px }
+        @media (max-width: 520px) {
+            .hero-image { height: 160px; }
+            .info-box { padding: 18px 16px; margin: 12px; }
+            .btn { padding: 16px; font-size: 1.04em; border-radius: 12px; }
+            .address { font-size: 0.98em; }
+            .back-link { font-size: 0.95em; }
+            .detail-header{ padding:10px 12px; min-height:56px }
+            .site-logo-small{ height:34px }
+            .detail-title{ font-size:0.95em }
+        }
+
+        /* Hidden custom magnifier (kept in DOM for future styling) */
+        .hero-zoom { display: none; }
+        .hero-zoom svg { width: 22px; height: 22px; stroke: var(--riofer-orange); }
+
+        /* Image modal / lightbox */
+        .image-modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 2200; padding: 18px; }
+        .image-modal.open { display: flex; }
+        .image-modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.7); }
+        .image-modal-content { position: relative; max-width: 980px; width: 100%; max-height: 100%; display:flex; align-items:center; justify-content:center; }
+        .image-modal-content img { max-width: 100%; max-height: calc(100vh - 120px); border-radius: 10px; box-shadow: 0 24px 60px rgba(10,28,64,0.4); display:block }
+        .modal-close { position: absolute; right: 8px; top: 8px; background: rgba(255,255,255,0.12); color: white; border: none; width:44px; height:44px; border-radius: 10px; font-size: 20px; display:flex; align-items:center; justify-content:center }
+        .modal-close:active { transform: translateY(1px) }
+
+        .address {
+            background:#f8f9fa;
+            padding:10px 12px;
+            border-radius:8px;
+            color:#495057;
+            font-weight:600;
+            margin-bottom:14px;
+            text-align:left;
+            max-width:760px;
+            width:100%;
+            box-sizing:border-box;
+            font-size:0.98em;
+        }
+
+		/* small header styles */
+        .detail-header{ display:flex; align-items:center; gap:12px; margin:12px 0 12px 0; max-width:420px; width:100%; box-sizing:border-box; padding:8px 12px; border-radius:10px; background: linear-gradient(90deg, var(--riofer-blue), var(--riofer-blue-2)); color:var(--text-color-light); box-shadow: 0 8px 20px rgba(10,28,64,0.12); }
+        .site-logo-small{ height:36px; width:auto }
+        .detail-title{ font-weight:800; color:var(--text-color-light); letter-spacing:1px; margin-left:6px }
+
+        /* Header consistent with index.html */
+        .header { background: transparent; color: var(--text-color-light); padding: 8px 12px; display:flex; align-items:center; justify-content:center; font-weight: 900; font-size: 1.05em; text-align: center; width: 100%; box-sizing: border-box; position: sticky; top: 0; z-index: 10; margin-bottom: 6px; }
+        .header-inner { display:flex; align-items:center; gap:12px; justify-content:center; max-width:1100px; margin:0 auto; }
+        .site-logo { height:44px; width:auto; display:block }
+        .brand-text { display:none }
+        @media(max-width:520px){ .site-logo-small{height:30px} .detail-header{margin:10px 0} }
+
+        /* footer */
+        .site-footer{ margin:18px auto 26px auto; padding:12px 14px; max-width:520px; width:calc(100% - 40px); background:#fff; box-shadow:0 8px 22px rgba(10,28,64,0.06); border-radius:10px; color:#495057; font-size:0.95em; text-align:center }
+        .site-footer .footer-row{ display:flex; gap:12px; justify-content:center; align-items:center; flex-wrap:wrap }
+        .site-footer .muted{ color:#6c757d; font-size:0.9em }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="header-inner">
+            <a href="img/logo.png" class="logo-link" title="Abrir logo" aria-label="Abrir logo em overlay">
+                <img src="img/logo.png" alt="Riofer" class="site-logo" onerror="this.style.display='none'">
+            </a>
+            <div class="brand-text">RIOFER | NAVEGAÇÃO RÁPIDA</div>
+        </div>
+    </div>
+
+    <div class="info-box">
+        <h1>BALANÇA RIOFER</h1>
+        <p class="subtitle">Selecione seu navegador:</p>
+        <a href="img/Balanca.png" class="hero-link" title="Abrir imagem" aria-label="Ver imagem ampliada">
+            <img src="img/Balanca.png" alt="Balança Riofer" class="hero-image">
+            <span class="hero-zoom" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14z" stroke="var(--riofer-orange)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M21 21l-4.35-4.35" stroke="var(--riofer-orange)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </a>
+
+        <div class="address">
+            Endereço / referência: Próximo ao TINTI Superatacado, em frente à Brapira.
+        </div>
+
+        <a href="https://maps.app.goo.gl/ebW7imFMCxf69d5w9" target="_blank" rel="noopener noreferrer" class="btn btn-maps" role="button" aria-label="Abrir no Google Maps">
+            Abrir no GOOGLE MAPS
+        </a>
+
+        <a href="https://www.waze.com/en/live-map/directions?latlng=-21.623224965385727%2C-46.89587961450333" target="_blank" rel="noopener noreferrer" class="btn btn-waze" role="button" aria-label="Abrir no Waze">
+            Abrir no WAZE
+        </a>
+
+        <p class="back-link">
+            <a href="index.html">Voltar para a Seleção de Destino</a>
+        </p>
+    </div>
+
+    <!-- Image modal / lightbox -->
+    <div id="imageModal" class="image-modal" role="dialog" aria-hidden="true">
+        <div class="image-modal-backdrop" data-modal-close></div>
+        <div class="image-modal-content" role="document">
+            <button class="modal-close" aria-label="Fechar imagem" data-modal-close>✕</button>
+            <img id="modalHeroImage" src="" alt="Imagem ampliada">
+        </div>
+    </div>
+
+	<!-- Logo lightbox (same as index) -->
+	<div id="logoModal" class="image-modal" role="dialog" aria-hidden="true">
+		<div class="image-modal-backdrop" data-modal-close></div>
+		<div class="image-modal-content" role="document">
+			<button class="modal-close" aria-label="Fechar imagem" data-modal-close>✕</button>
+			<img id="logoModalImage" src="" alt="Logo Riofer">
+		</div>
+	</div>
+
+    <footer class="site-footer">
+        <div class="footer-row">
+            <div class="muted">Horário: Seg–Sex 07:30–17:30</div>
+        </div>
+    </footer>
+
+    </body>
+
+    <script>
+(function(){
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalHeroImage');
+    const heroLink = document.querySelector('.hero-link');
+    const closeButtons = modal.querySelectorAll('[data-modal-close]');
+
+    function openModal(src, alt){
+        modalImg.src = src;
+        modalImg.alt = alt || '';
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden','false');
+        setTimeout(()=> modal.querySelector('.modal-close').focus(), 50);
+    }
+    function closeModal(){
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden','true');
+        modalImg.src = '';
+    }
+
+    if(heroLink){
+        heroLink.addEventListener('click', function(e){
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            const img = this.querySelector('img');
+            openModal(href, img ? img.alt : '');
+        });
+    }
+
+    closeButtons.forEach(btn=> btn.addEventListener('click', closeModal));
+    modal.querySelector('.image-modal-backdrop').addEventListener('click', closeModal);
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+})();
+</script>
+
+<script>
+(function(){
+    const logoLink = document.querySelector('.logo-link');
+    const logoModal = document.getElementById('logoModal');
+    const logoImg = document.getElementById('logoModalImage');
+    const logoClose = logoModal ? logoModal.querySelector('[data-modal-close]') : null;
+
+    function openLogo(src, alt){
+        if(!logoModal) return;
+        logoImg.src = src;
+        logoImg.alt = alt || '';
+        logoModal.classList.add('open');
+        logoModal.setAttribute('aria-hidden','false');
+        setTimeout(()=> logoModal.querySelector('.modal-close').focus(), 50);
+    }
+    function closeLogo(){
+        if(!logoModal) return;
+        logoModal.classList.remove('open');
+        logoModal.setAttribute('aria-hidden','true');
+        logoImg.src = '';
+    }
+
+    if(logoLink){
+        logoLink.addEventListener('click', function(e){
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            const img = this.querySelector('img');
+            openLogo(href, img ? img.alt : '');
+        });
+    }
+    if(logoClose) logoClose.addEventListener('click', closeLogo);
+    if(logoModal) logoModal.querySelector('.image-modal-backdrop').addEventListener('click', closeLogo);
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeLogo(); });
+})();
+</script>
+
+</html>
