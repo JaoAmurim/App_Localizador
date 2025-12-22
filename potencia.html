@@ -161,10 +161,14 @@
             font-size:0.98em;
         }
 
-		/* small header styles */
-        .detail-header{ display:flex; align-items:center; gap:12px; margin:12px 0 12px 0; max-width:420px; width:100%; box-sizing:border-box; padding:8px 12px; border-radius:10px; background: linear-gradient(90deg, var(--riofer-blue), var(--riofer-blue-2)); color:var(--text-color-light); box-shadow: 0 8px 20px rgba(10,28,64,0.12); }
+        /* small header styles - tuned for contrast and spacing */
+        .detail-header{ display:flex; align-items:center; gap:8px; margin:8px 0 12px 0; max-width:420px; width:100%; box-sizing:border-box; padding:6px 10px; border-radius:10px; background: linear-gradient(90deg, var(--riofer-blue), var(--riofer-blue-2)); color:#ffffff; box-shadow: 0 8px 20px rgba(10,28,64,0.12); }
+        .detail-header .icon-emoji{ font-size:20px; line-height:1; flex-shrink:0; display:inline-block; margin-top:2px; }
         .site-logo-small{ height:36px; width:auto }
-        .detail-title{ font-weight:800; color:var(--text-color-light); letter-spacing:1px; margin-left:6px }
+        .detail-title{ font-weight:800; color:#ffffff; letter-spacing:1px; margin-left:8px; font-size:1.02em }
+
+        /* Ensure no underline appears under header/title links */
+        .detail-title, .detail-title * { text-decoration: none !important; }
 
         /* Header consistent with index.html */
         .header { background: transparent; color: var(--text-color-light); padding: 8px 12px; display:flex; align-items:center; justify-content:center; font-weight: 900; font-size: 1.05em; text-align: center; width: 100%; box-sizing: border-box; position: sticky; top: 0; z-index: 10; margin-bottom: 6px; }
@@ -191,7 +195,10 @@
     </div>
 
     <div class="info-box">
-        <h1>RIOFER DEPÓSITO</h1>
+        <div class="detail-header">
+            <span class="icon-emoji" aria-hidden="true">📦</span>
+            <div class="detail-title"><strong>Riofer Filial - Depósito</strong></div>
+        </div>
         <p class="subtitle">Selecione seu navegador:</p>
         <a href="img/Riofer Velha.jpeg" class="hero-link" title="Abrir imagem" aria-label="Ver imagem ampliada">
             <img src="img/Riofer Velha.jpeg" alt="Depósito Riofer" class="hero-image">
@@ -204,7 +211,7 @@
         </a>
 
         <div class="address">
-            Endereço / referência: Rodovia SP-207 — Posto Potência (atrás da Riolog). Use esta referência ao navegar.
+            Rodovia Doutor José Vasconcelos dos Reis, N° 330, Bairro Cafecran - São José do Rio Pardo / SP 13729-899
         </div>
 
         <a href="https://maps.app.goo.gl/FHMtRYrRUfdAXuXdA" target="_blank" rel="noopener noreferrer" class="btn btn-maps" role="button" aria-label="Abrir no Google Maps">
@@ -229,20 +236,14 @@
         </div>
     </div>
 
-	<!-- Logo lightbox (same as index) -->
-	<div id="logoModal" class="image-modal" role="dialog" aria-hidden="true">
-		<div class="image-modal-backdrop" data-modal-close></div>
-		<div class="image-modal-content" role="document">
-			<button class="modal-close" aria-label="Fechar imagem" data-modal-close>✕</button>
-			<img id="logoModalImage" src="" alt="Logo Riofer">
-		</div>
-	</div>
-
-    <footer class="site-footer">
-        <div class="footer-row">
-            <div class="muted">Horário: Seg–Sex 07:30–17:30</div>
+    <!-- Logo lightbox (same as index) -->
+    <div id="logoModal" class="image-modal" role="dialog" aria-hidden="true">
+        <div class="image-modal-backdrop" data-modal-close></div>
+        <div class="image-modal-content" role="document">
+            <button class="modal-close" aria-label="Fechar imagem" data-modal-close>✕</button>
+            <img id="logoModalImage" src="" alt="Logo Riofer">
         </div>
-    </footer>
+    </div>
 
     <script>
     (function(){

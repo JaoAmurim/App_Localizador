@@ -9,6 +9,10 @@
     <meta name="theme-color" content="#0A1C40">
     <title>Riofer | Navegação Fácil</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
         /* Variáveis de Cor (Riofer Palette) */
         :root {
@@ -22,7 +26,7 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Poppins', 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
             background-color: var(--background-light);
             color: var(--text-color-dark);
             margin: 0;
@@ -34,6 +38,16 @@
             align-items: center;
             min-height: 100vh;
             overflow-x: hidden;
+        }
+
+        /* Prefer platform fonts on touch devices for native look */
+        @media (any-pointer: coarse) {
+            body { font-family: Roboto, 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Poppins', Arial, sans-serif; }
+        }
+
+        /* iOS specific preference */
+        @supports (-webkit-touch-callout: none) {
+            body { font-family: -apple-system, 'Helvetica Neue', Roboto, 'Poppins', Arial, sans-serif; }
         }
         /* HEADER - Visual de Barra de Navegação Fixa (App) */
         /* Simplified header: only centered logo to avoid odd empty space */
@@ -133,19 +147,27 @@
                 gap: 18px;
                 max-width: 900px;
             }
+        }
+
+        /* Very narrow screens: single column layout for cards */
+        @media (max-width: 380px) {
+            .card-grid.compact-cards { display: grid; grid-template-columns: 1fr; gap: 12px; padding: 0 12px; }
+            .small-card { width: 100%; max-width: 460px; margin: 0 auto; }
+            .card-icon { width:64px; height:64px; }
+            .card-icon .icon-emoji { font-size:34px; transform: translateY(1px); }
+        }
             .header {
                 font-size: 1.5em;
             }
             .page-title {
                 font-size: 1.8em;
             }
-        }
 
         /* Estilo dos Cards de Navegação */
         .nav-card {
             background: linear-gradient(180deg, #ffffff, #fbfcfd);
             border-radius: 12px;
-            box-shadow: var(--card-shadow);
+            box-shadow: 0 14px 40px rgba(10,28,64,0.08), 0 2px 6px rgba(10,28,64,0.03);
             text-decoration: none;
             display: flex;
             flex-direction: column;
@@ -166,9 +188,13 @@
 
         .nav-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 18px 40px rgba(10, 28, 64, 0.14);
+            box-shadow: 0 28px 60px rgba(10, 28, 64, 0.16), 0 6px 18px rgba(10,28,64,0.06);
             border-color: rgba(255,127,0,0.18);
         }
+
+        /* Remove underline for any links inside navigation cards and header titles */
+        .nav-card, .nav-card * { text-decoration: none !important; }
+        .detail-title, .detail-title * { text-decoration: none !important; }
 
         /* Ícones */
         .card-image {
@@ -252,21 +278,22 @@
 
         /* Compact cards that match the screenshot (desktop) */
         /* Use flex on wider screens so single-item last rows are centered; mobile rules below switch to grid */
-        .compact-cards { display:flex; flex-wrap:wrap; justify-content:center; gap:18px; }
-        .small-card { width:160px; height:140px; padding:14px; align-items:center; text-align:center; gap:8px; display:flex; flex-direction:column; justify-content:center; }
-        .card-icon { width:56px; height:56px; display:flex; align-items:center; justify-content:center; border-radius:50%; background: linear-gradient(180deg,#f4f7fb,#ffffff); box-shadow: 0 6px 18px rgba(7,32,48,0.04); margin:0 0 6px 0 }
-        .card-title.small { font-size:0.98em; text-transform:none; color:var(--riofer-blue); margin:6px 0 0 0; font-weight:800 }
-        .card-subtitle.small { font-size:0.86em; color:#6c757d; margin:4px 0 0 0 }
+        .compact-cards { display:flex; flex-wrap:wrap; justify-content:center; gap:22px; }
+        .small-card { width:180px; min-height:160px; padding:18px; align-items:center; text-align:center; gap:10px; display:flex; flex-direction:column; justify-content:flex-start; box-shadow: 0 18px 48px rgba(10,28,64,0.10), 0 3px 8px rgba(10,28,64,0.04); border: 1px solid rgba(10,28,64,0.06); }
+        .card-icon { width:64px; height:64px; display:flex; align-items:center; justify-content:center; border-radius:50%; background: linear-gradient(180deg,#f4f7fb,#ffffff); box-shadow: 0 6px 18px rgba(7,32,48,0.04); margin:0 0 6px 0 }
+        .card-icon .icon-emoji { font-size:32px; line-height:1; display:block; transform: translateY(1px); }
+        .card-title.small { font-size:0.98em; text-transform:none; color:var(--riofer-blue); margin:8px 0 0 0; font-weight:800; line-height:1.14; white-space:normal }
+        .card-subtitle.small { font-size:0.92em; color:#6c757d; margin:6px 0 0 0; line-height:1.28; overflow-wrap:break-word; word-break:normal; hyphens:auto; text-align:center; padding: 0 6px }
 
         /* Mobile-first adjustments: stack cards, increase tap targets and readability */
         @media (max-width: 520px) {
             /* Use a responsive grid so cards sit side-by-side and keep equal heights */
             .card-grid.compact-cards {
                 display: grid;
-                grid-template-columns: repeat(2, minmax(140px, 1fr));
-                gap: 14px;
+                grid-template-columns: repeat(2, minmax(150px, 1fr));
+                gap: 12px;
                 align-items: stretch;
-                padding: 0 14px;
+                padding: 0 12px;
                 width: 100%;
                 box-sizing: border-box;
                 max-width: 760px;
@@ -274,17 +301,18 @@
             }
             .small-card {
                 width: 100%;
-                height: 150px;
-                padding: 14px 12px;
+                min-height: 170px;
+                padding: 16px 12px;
                 border-radius: 14px;
-                box-shadow: 0 14px 40px rgba(7,32,48,0.07);
-                display:flex; flex-direction:column; justify-content:center; align-items:center; gap:6px;
+                box-shadow: 0 16px 44px rgba(10,28,64,0.09), 0 3px 8px rgba(10,28,64,0.04);
+                display:flex; flex-direction:column; justify-content:flex-start; align-items:center; gap:8px;
                 transition: transform .12s ease, box-shadow .12s ease;
+                box-sizing: border-box;
             }
-            .small-card:hover{ transform: translateY(-6px); box-shadow: 0 20px 48px rgba(7,32,48,0.10) }
-            .card-icon { width:56px; height:56px; margin-bottom:6px }
-            .card-title.small { font-size: 1.04em; line-height:1.12; text-transform:none; text-align:center }
-            .card-subtitle.small { font-size:0.92em; color:#5f6b73; text-align:center; margin:4px 0 0 }
+            .small-card:hover{ transform: translateY(-6px); box-shadow: 0 28px 60px rgba(10,28,64,0.14), 0 6px 18px rgba(10,28,64,0.06) }
+            .card-icon { width:64px; height:64px; margin-bottom:6px }
+            .card-title.small { font-size: 1.02em; line-height:1.12; text-transform:none; text-align:center; margin:6px 0 0 }
+            .card-subtitle.small { font-size:0.92em; color:#5f6b73; text-align:center; margin:6px 0 0; overflow-wrap:break-word; hyphens:auto; padding:0 6px }
             .page-desc { padding: 0 16px; font-size:0.98em }
             .header { font-size: 1.02em; padding: 10px 12px; min-height:56px }
             .brand-text{ font-size:0.95em }
@@ -380,35 +408,26 @@
 
             <a href="paula_lima.html" class="nav-card small-card" title="MATRIZ RIOFER METAIS TECNOLOGIA EM AÇO">
                 <div class="card-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" width="36" height="36" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-                        <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z" fill="#0A1C40"/>
-                        <circle cx="12" cy="9" r="2.5" fill="#FF7F00"/>
-                    </svg>
+                    <span class="icon-emoji" aria-hidden="true">🏭</span>
                 </div>
-                <p class="card-title small">MATRIZ RIOFER</p>
-                <p class="card-subtitle small">Entrega / Recebimento</p>
+                <p class="card-title small"><strong>Riofer Matriz - Unidade Industrial</strong></p>
+                <p class="card-subtitle small">Administrativo, Produção, carga e descarga e expedição</p>
             </a>
 
             <a href="potencia.html" class="nav-card small-card">
                 <div class="card-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" width="36" height="36" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-                        <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z" fill="#0A1C40"/>
-                        <circle cx="12" cy="9" r="2.5" fill="#FF7F00"/>
-                    </svg>
+                    <span class="icon-emoji" aria-hidden="true">📦</span>
                 </div>
-                <p class="card-title small">RIOFER DEPÓSITO</p>
-                <p class="card-subtitle small">RH / Deposito</p>
+                <p class="card-title small"><strong>Riofer Filial - Depósito</strong></p>
+                <p class="card-subtitle small">Depósito de materiais, Acesso exclusivo para armazenamento e movimentação</p>
             </a>
 
             <a href="balanca.html" class="nav-card small-card">
                 <div class="card-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" width="36" height="36" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-                        <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z" fill="#0A1C40"/>
-                        <circle cx="12" cy="9" r="2.5" fill="#FF7F00"/>
-                    </svg>
+                    <span class="icon-emoji" aria-hidden="true">⚖️</span>
                 </div>
-                <p class="card-title small">BALANÇA RIOFER</p>
-                <p class="card-subtitle small">Pesagem</p>
+                <p class="card-title small"><strong>Balança Riofer</strong></p>
+                <p class="card-subtitle small">Balança para pesagem de caminhões, uso exclusivo para motoristas</p>
             </a>
 
         </div>
